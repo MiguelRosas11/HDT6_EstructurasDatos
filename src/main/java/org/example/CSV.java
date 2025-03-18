@@ -5,7 +5,7 @@ import java.util.*;
 public class CSV {
 
 
-    public static Map<String, Pokemon> CargarPokemons(String ruta, Mapa<String, Pokemon> factory) {
+    public static Map<String, Pokemon> CargarPokemons(String ruta, Mapa factory) {
         Map<String, Pokemon> pokemonMap = factory.createMap();
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String line = br.readLine();
@@ -32,4 +32,6 @@ public class CSV {
         }
         return pokemonMap;
     }
+
+
 }
