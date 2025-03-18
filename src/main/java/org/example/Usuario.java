@@ -9,13 +9,19 @@ public class Usuario {
         this.coleccion = coleccion;
     }
 
-    public void AgregarPokemon(String name, Pokemon pokemon){
-        if(!coleccion.containsKey(name)){
-            coleccion.put(name, pokemon);
-            System.out.println("Se ha agregado correctamente");
-        }
-        else{
-            System.out.println("El pokemon ya existe en la colección");
+
+    public void AgregarPokemon(String name, Pokedex pokedex){
+        if (!coleccion.containsKey(name)) {
+            Pokemon pokemon = pokedex.getPokemon(name);
+
+            if (pokemon != null) {
+                coleccion.put(name, pokemon);  // ✅ Agregarlo a la colección
+                System.out.println("Se ha agregado correctamente");
+            } else {
+                System.out.println("El Pokémon no existe en la Pokédex");
+            }
+        } else {
+            System.out.println("El Pokémon ya existe en la colección");
         }
     }
 

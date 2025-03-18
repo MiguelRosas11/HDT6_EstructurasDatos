@@ -68,5 +68,9 @@ public class Pokedex {
         }
     }
 
+    public Pokemon getPokemon(String name) {
+        return pokedex.get(name);
+    }
+
 
 }

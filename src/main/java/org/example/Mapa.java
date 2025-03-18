@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public abstract class Mapa implements iMap{
-    protected Map<String, Pokemon> mapaInterno;  // ✅ Internamente usa un HashMap, TreeMap o LinkedHashMap
+    protected Map<String, Pokemon> mapaInterno;
 
     public Mapa(Map<String, Pokemon> mapa) {
         this.mapaInterno = mapa;

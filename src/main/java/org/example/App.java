@@ -15,20 +15,25 @@ public class App
         System.out.println("1. HashMap  \n2. TreeMap  \n3. LinkedHashMap");
         int choicePokedex = sc.nextInt();
 
+        Usuario user;
         Mapa mapaPokedex;
         switch (choicePokedex) {
             case 1:
                 mapaPokedex = new HashMapMapa();
+                user = new Usuario(new HashMapMapa());
                 break;
             case 2:
                 mapaPokedex = new TreeMapMapa();
+                user = new Usuario(new TreeMapMapa());
                 break;
             case 3:
                 mapaPokedex = new LinkedHashMapMapa();
+                user = new Usuario(new LinkedHashMapMapa());
                 break;
             default:
                 System.out.println("Opción inválida, se usará HashMap por defecto.");
                 mapaPokedex = new HashMapMapa();
+                user = new Usuario(new HashMapMapa());
 
         }
         int menu = 0;
@@ -36,6 +41,7 @@ public class App
             System.out.println("Bienvenido, ¿qué desea realizar? \n1. Agregar un pokemon a coleccion. \n2. Mostrar los datos de un pokemon ingresando su nombre. \n3. Mostrar el pokemones de la colección ordenados por tipo 1. \n4. Mostrar pokemones existentes ordenados por tipo 1. \n5. Buscar pokemones ingresando habilidad.");
             int opc = sc.nextInt(); sc.nextLine();
             if(opc == 1){
+                System.out.println("Introduzca el nombre del pokemon");
 
             }
             else if (opc == 2){
