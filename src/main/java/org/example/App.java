@@ -15,6 +15,7 @@ public class App
         System.out.println("1. HashMap  \n2. TreeMap  \n3. LinkedHashMap");
         int choicePokedex = sc.nextInt();
 
+
         Usuario user;
         Mapa mapaPokedex;
         switch (choicePokedex) {
@@ -36,27 +37,38 @@ public class App
                 user = new Usuario(new HashMapMapa());
 
         }
+
+        Pokedex pokedex = new Pokedex(mapaPokedex);
+
         int menu = 0;
         while(menu<1) {
             System.out.println("Bienvenido, ¿qué desea realizar? \n1. Agregar un pokemon a coleccion. \n2. Mostrar los datos de un pokemon ingresando su nombre. \n3. Mostrar el pokemones de la colección ordenados por tipo 1. \n4. Mostrar pokemones existentes ordenados por tipo 1. \n5. Buscar pokemones ingresando habilidad.");
             int opc = sc.nextInt(); sc.nextLine();
             if(opc == 1){
                 System.out.println("Introduzca el nombre del pokemon");
+                String name = sc.nextLine();
+                user.AgregarPokemon(name, pokedex);
 
             }
             else if (opc == 2){
 
+
             }
 
             else if (opc == 3){
+                user.mostrarColeccionOrdenadaPorTipo();
 
             }
 
             else if (opc == 4){
+                pokedex.mostrarTodosOrdenadosPorTipo();
 
             }
 
             else if (opc == 5){
+                System.out.println("Ingrese la habilidad que desea encontrar");
+                String habilidad = sc.nextLine();
+                pokedex.buscarPorHabilidad(habilidad);
 
             }
 

@@ -1,6 +1,9 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Usuario {
     private Mapa coleccion;
@@ -26,9 +29,18 @@ public class Usuario {
     }
 
     public void mostrarColeccionOrdenadaPorTipo() {
-        coleccion.mapaInterno.values().stream()
-                .sorted(Comparator.comparing(Pokemon::getType1))
-                .forEach(p -> System.out.println(p.getName() + " - " + p.getType1() + "\n"));
+        List<Pokemon> listaPokemon = new ArrayList<>(coleccion.mapaInterno.values());
+
+        Collections.sort(listaPokemon, new Comparator<Pokemon>() {
+            @Override
+            public int compare(Pokemon p1, Pokemon p2) {
+                return p1.getType1().compareTo(p2.getType1());
+            }
+        });
+
+        for (Pokemon p : listaPokemon) {
+            System.out.println(p.getName() + " - " + p.getType1());
+        }
     }
 
 

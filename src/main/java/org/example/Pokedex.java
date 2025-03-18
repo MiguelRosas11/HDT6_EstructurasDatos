@@ -68,6 +68,25 @@ public class Pokedex {
         }
     }
 
+    public void buscarPorNombre(String name) {
+        Pokemon pokemon = pokedex.get(name);  // ✅ Buscar directamente en el `Map`
+
+        if (pokemon != null) {
+            System.out.println("Nombre: " + pokemon.getName());
+            System.out.println("Tipo 1: " + pokemon.getType1());
+            System.out.println("Tipo 2: " + pokemon.getType2());
+            System.out.println("Altura: " + pokemon.getHeight() + " m");
+            System.out.println("Peso: " + pokemon.getWeight() + " kg");
+            System.out.println("Clasificación: " + pokemon.getClassification());
+            System.out.println("Habilidades: " + String.join(", ", pokemon.getAbilities()));
+        } else {
+            System.out.println("No se encontró un Pokémon con el nombre: " + name);
+        }
+    }
+
+
+
+
     public Pokemon getPokemon(String name) {
         return pokedex.get(name);
     }

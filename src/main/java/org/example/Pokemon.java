@@ -32,4 +32,29 @@ public class Pokemon {
     public String getName() { return name; }
     public String getType1() { return type1; }
     public List<String> getAbilities() { return abilities; }
+
+    public int getPokedexNumber() {
+        return pokedexNumber;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getGeneration() {
+        return generation;
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public String getType2() {
+        return type2;
+    }
+
 }
