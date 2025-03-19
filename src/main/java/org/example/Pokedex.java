@@ -14,11 +14,11 @@ public class Pokedex {
     public Mapa CargarPokemons(String ruta, Mapa pokedex) {
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String line;
-            br.readLine(); // Saltar encabezado
+            br.readLine();
 
             while ((line = br.readLine()) != null) {
                 try {
-                    // ✅ Usar un analizador de CSV adecuado
+
                     String[] data = parseCSVLine(line);
 
                     String name = data[0].trim();
@@ -29,7 +29,7 @@ public class Pokedex {
                     double height = Double.parseDouble(data[5].trim());
                     double weight = Double.parseDouble(data[6].trim());
 
-                    // ✅ Manejar correctamente las habilidades con comas dentro de valores
+
                     String abilitiesRaw = data[7].trim();
                     List<String> abilities = Arrays.asList(abilitiesRaw.split(",\\s*"));
 
@@ -102,7 +102,7 @@ public class Pokedex {
     }
 
     public void buscarPorNombre(String name) {
-        Pokemon pokemon = pokedex.get(name);  // ✅ Buscar directamente en el `Map`
+        Pokemon pokemon = pokedex.get(name);
 
         if (pokemon != null) {
             System.out.println("Nombre: " + pokemon.getName());
