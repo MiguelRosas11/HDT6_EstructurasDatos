@@ -13,29 +13,62 @@ public class Pokedex {
 
     public Mapa CargarPokemons(String ruta, Mapa pokedex) {
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
-            String line = br.readLine();
+            String line;
+            br.readLine(); // Saltar encabezado
+
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
+                try {
+                    // ✅ Usar un analizador de CSV adecuado
+                    String[] data = parseCSVLine(line);
 
-                String name = data[0];
-                int Number = Integer.parseInt(data[1]);
-                String type1 = data[2];
-                String type2 = data[3].isEmpty() ? "None" : data[3];
-                String classification = data[4];
-                double height = Double.parseDouble(data[5]);
-                double weight = Double.parseDouble(data[6]);
-                List<String> abilities = Arrays.asList(data[7].split(", "));
-                int generation = Integer.parseInt(data[8]);
-                boolean isLegendary = data[9].equalsIgnoreCase("Yes");
+                    String name = data[0].trim();
+                    int number = Integer.parseInt(data[1].trim());
+                    String type1 = data[2].trim();
+                    String type2 = data[3].trim().isEmpty() ? "None" : data[3].trim();
+                    String classification = data[4].trim();
+                    double height = Double.parseDouble(data[5].trim());
+                    double weight = Double.parseDouble(data[6].trim());
 
-                Pokemon pokemon = new Pokemon(name, Number, type1, type2, classification,
-                        height, weight, abilities, generation, isLegendary);
-                pokedex.put(name, pokemon);
+                    // ✅ Manejar correctamente las habilidades con comas dentro de valores
+                    String abilitiesRaw = data[7].trim();
+                    List<String> abilities = Arrays.asList(abilitiesRaw.split(",\\s*"));
+
+                    int generation = Integer.parseInt(data[8].trim());
+                    boolean isLegendary = data[9].trim().equalsIgnoreCase("Yes");
+
+                    Pokemon pokemon = new Pokemon(name, number, type1, type2, classification,
+                            height, weight, abilities, generation, isLegendary);
+
+                    pokedex.put(name, pokemon);
+                } catch (Exception e) {
+                    System.err.println("Error al procesar línea: " + line);
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
         return pokedex;
+    }
+
+    private String[] parseCSVLine(String line) {
+        List<String> values = new ArrayList<>();
+        boolean insideQuotes = false;
+        StringBuilder currentValue = new StringBuilder();
+
+        for (char c : line.toCharArray()) {
+            if (c == '"') {
+                insideQuotes = !insideQuotes; // Alternar estado de comillas
+            } else if (c == ',' && !insideQuotes) {
+                values.add(currentValue.toString().trim());
+                currentValue.setLength(0);
+            } else {
+                currentValue.append(c);
+            }
+        }
+        values.add(currentValue.toString().trim());
+
+        return values.toArray(new String[0]);
     }
 
     public void mostrarTodosOrdenadosPorTipo() {

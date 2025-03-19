@@ -51,7 +51,9 @@ public class App
 
             }
             else if (opc == 2){
-
+                System.out.println("Introduzca el nombre del pokemon del cual quiere información");
+                String name = sc.nextLine();
+                pokedex.buscarPorNombre(name);
 
             }
 
